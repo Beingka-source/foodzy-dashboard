@@ -1,101 +1,139 @@
-import Image from "next/image";
+import { Alerts } from "@/components/dashboard/alerts"
+import { Layout } from "@/components/layout"
+import { StatsCards } from "@/components/stats-cards"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { CreditCard, Gift, Grid, Menu, MessageCircle, MessageSquare, Ticket, UserCog } from "lucide-react"
+import Link from "next/link"
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
-export default function Home() {
+const revenueData = [
+  { name: "Mon", total: 1200 },
+  { name: "Tue", total: 1800 },
+  { name: "Wed", total: 2200 },
+  { name: "Thu", total: 1800 },
+  { name: "Fri", total: 2400 },
+  { name: "Sat", total: 2800 },
+  { name: "Sun", total: 3200 },
+]
+
+const topSellingItems = [
+  { name: "Pad Thai", sales: 145, revenue: 2175 },
+  { name: "Green Curry", sales: 132, revenue: 2112 },
+  { name: "Mango Sticky Rice", sales: 125, revenue: 1250 },
+  { name: "Tom Yum Soup", sales: 98, revenue: 1470 },
+  { name: "Thai Iced Tea", sales: 90, revenue: 450 },
+]
+
+export default function DashboardPage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <Layout>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h1 className="text-3xl font-bold">Dashboard</h1>
+            <p className="text-gray-500">Welcome back to your dashboard</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/menu">
+              <Button className="bg-[#f77700] hover:bg-[#f77700]/90">
+                <Menu className="mr-2 h-4 w-4" />
+                Manage Menu
+              </Button>
+            </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="border-green-500 text-green-600 hover:bg-green-50">
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Line Official
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem>
+                  <Grid className="mr-2 h-4 w-4" />
+                  <span>Rich Menu</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Ticket className="mr-2 h-4 w-4" />
+                  <span>Coupon</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <CreditCard className="mr-2 h-4 w-4" />
+                  <span>Line Pay</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Gift className="mr-2 h-4 w-4" />
+                  <span>Reward Card</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <MessageSquare className="mr-2 h-4 w-4" />
+                  <span>Auto-Response</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <UserCog className="mr-2 h-4 w-4" />
+                  <span>Edit Profile</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+        <StatsCards />
+        <div className="grid gap-6 md:grid-cols-2">
+          <Alerts />
+          <Card>
+            <CardHeader>
+              <CardTitle>Weekly Revenue</CardTitle>
+              <CardDescription>Overview of this week's revenue</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={revenueData}>
+                  <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
+                  <YAxis
+                    stroke="#888888"
+                    fontSize={12}
+                    tickLine={false}
+                    axisLine={false}
+                    tickFormatter={(value) => `฿${value}`}
+                  />
+                  <Tooltip
+                    formatter={(value: number) => [`฿${value}`, "Revenue"]}
+                    labelFormatter={(label) => `Day: ${label}`}
+                  />
+                  <Bar dataKey="total" fill="#f77700" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Top Selling Items</CardTitle>
+            <CardDescription>This week's best-performing menu items</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {topSellingItems.map((item, index) => (
+                <div key={index} className="flex items-center">
+                  <div className="w-9 h-9 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold mr-4">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold">{item.name}</h3>
+                    <p className="text-sm text-gray-500">{item.sales} sales</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-semibold">฿{item.revenue.toLocaleString()}</p>
+                    <p className="text-sm text-gray-500">Revenue</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </Layout>
+  )
 }
+

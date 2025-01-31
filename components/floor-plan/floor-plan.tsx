@@ -274,7 +274,7 @@ export function FloorPlan() {
             </div>
 
             <Sheet open={selectedTable !== null} onOpenChange={() => setSelectedTable(null)}>
-                <SheetContent>
+                <SheetContent side="right">
                     <SheetHeader>
                         <SheetTitle>
                             Table {selectedTable?.number} - {selectedTable?.status === "reserved" ? "Reservation" : "Orders"}

@@ -38,9 +38,9 @@ export function SlipHistory({ transactions, onSelectTransaction }: SlipHistoryPr
                                 <Badge
                                     variant={
                                         transaction.status === "completed"
-                                            ? "success"
+                                            ? "default"
                                             : transaction.status === "pending"
-                                                ? "warning"
+                                                ? "secondary"
                                                 : "destructive"
                                     }
                                 >

@@ -4,11 +4,11 @@ import {
     ClipboardList,
     FileCheck,
     HelpCircle,
+    Home,
     LayoutGrid,
     LogOut,
     Package,
     ShoppingBag,
-    Ticket,
     User,
 } from "lucide-react"
 import Link from "next/link"
@@ -18,19 +18,27 @@ export function Sidebar() {
     const pathname = usePathname()
 
     const isActive = (path: string) => {
-        return pathname === path
+        return pathname.startsWith(path)
     }
 
     return (
         <aside className="flex h-full flex-col bg-white">
             <div className="flex h-16 items-center border-b px-6">
-                <Link className="flex items-center gap-2 font-semibold" href="#">
+                <Link className="flex items-center gap-2 font-semibold" href="/">
                     <ShoppingBag className="h-6 w-6 text-[#f77700]" />
                     <span className="text-[#f77700]">foodZy</span>
                 </Link>
             </div>
             <div className="flex flex-1 flex-col gap-4 p-6 overflow-y-auto">
                 <nav className="flex flex-col gap-2">
+                    <Link
+                        className={`flex items-center gap-2 rounded-lg px-3 py-2 transition-colors ${isActive("/") ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900"
+                            }`}
+                        href="/"
+                    >
+                        <Home className="h-5 w-5" />
+                        Dashboard
+                    </Link>
                     <Link
                         className={`flex items-center gap-2 rounded-lg px-3 py-2 transition-colors ${isActive("/staff") ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900"
                             }`}
@@ -62,14 +70,6 @@ export function Sidebar() {
                     >
                         <LayoutGrid className="h-5 w-5" />
                         Floor Plan
-                    </Link>
-                    <Link
-                        className={`flex items-center gap-2 rounded-lg px-3 py-2 transition-colors ${isActive("/coupons") ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900"
-                            }`}
-                        href="/coupons"
-                    >
-                        <Ticket className="h-5 w-5" />
-                        Coupon and Virtual Code
                     </Link>
                     <Link
                         className={`flex items-center gap-2 rounded-lg px-3 py-2 transition-colors ${isActive("/verification") ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900"

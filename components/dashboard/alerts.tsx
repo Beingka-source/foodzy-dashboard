@@ -1,3 +1,5 @@
+'use client'
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertTriangle, Package } from "lucide-react"
 
@@ -30,7 +32,7 @@ const alerts: Alert[] = [
     },
 ]
 
-export function Alerts() {
+const Alerts = () => {
     return (
         <Card>
             <CardHeader>
@@ -66,4 +68,6 @@ export function Alerts() {
         </Card>
     )
 }
+
+export default Alerts
 

@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { AlertTriangle, ArrowDown, ArrowUp, DollarSign, ShoppingBag, Users } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AlertTriangle, ArrowDown, ArrowUp, DollarSign, ShoppingBag, Users } from "lucide-react";
 
-export function StatsCards() {
+const StatsCards = () => {
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
@@ -71,4 +71,6 @@ export function StatsCards() {
         </div>
     )
 }
+
+export default StatsCards;
 
